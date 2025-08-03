@@ -34,14 +34,24 @@ class Producao extends BaseController
     }
 
     public function store(){
-        if ($this->producaoModel->save($this->request->getPost())){
-            return view("messages",[
-                'message' => 'Produção salva com sucesso'
-            ]);
-        } else{
-            echo"Ocorreu um erro";
-        }
+    $postData = $this->request->getPost();
+    
+    // Buscar dados adicionais da OMDb
+    $apiData = $this->fetchMovieData($postData['filme']);
+
+    if ($apiData) {
+        $postData = array_merge($postData, $apiData);
     }
+
+    if ($this->producaoModel->save($postData)){
+        return view("messages", [
+            'message' => 'Produção salva com sucesso'
+        ]);
+    } else {
+        echo "Ocorreu um erro";
+    }
+}
+
 
     public function edit($id)
     {
@@ -71,5 +81,31 @@ class Producao extends BaseController
         'totalMinutos' => $totalMinutos ?? 0
     ]);
 }
+
+private function fetchMovieData($titulo)
+{
+    $apiKey = 'a0013cdf';
+    $titulo = urlencode($titulo);
+    $url = "http://www.omdbapi.com/?t={$titulo}&apikey={$apiKey}&plot=full";
+
+    $client = \Config\Services::curlrequest();
+    $response = $client->get($url);
+
+    if ($response->getStatusCode() === 200) {
+        $data = json_decode($response->getBody(), true);
+
+        if ($data['Response'] === 'True') {
+            return [
+                'diretor' => $data['Director'] ?? null,
+                'elenco' => $data['Actors'] ?? null,
+                'poster' => $data['Poster'] ?? null,
+                'sinopse' => $data['Plot'] ?? null,
+            ];
+        }
+    }
+
+    return null;
+}
+
 
 }

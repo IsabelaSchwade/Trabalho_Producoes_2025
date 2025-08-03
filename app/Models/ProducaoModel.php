@@ -12,7 +12,10 @@ class ProducaoModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields = ['filme', 'nota', 'comentario', 'status', 'duracao'];
+    protected $allowedFields = [
+    'filme', 'nota', 'comentario', 'status', 'duracao',
+    'diretor', 'elenco', 'poster', 'sinopse'
+];
 
 
     protected bool $allowEmptyInserts = false;

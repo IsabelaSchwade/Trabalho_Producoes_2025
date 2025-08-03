@@ -93,3 +93,19 @@ in APPPATH\Controllers\BaseController.php on line 11.
 14 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')
 DEBUG - 2025-08-03 01:47:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-08-03 02:00:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-08-03 15:43:10 --> CodeIgniter\HTTP\Exceptions\HTTPException: 22 : The requested URL returned error: 401
+[Method: POST, Route: producao/store]
+in SYSTEMPATH\HTTP\CURLRequest.php on line 699.
+ 1 SYSTEMPATH\HTTP\CURLRequest.php(699): CodeIgniter\HTTP\Exceptions\HTTPException::forCurlError('22', 'The requested URL returned error: 401')
+ 2 SYSTEMPATH\HTTP\CURLRequest.php(381): CodeIgniter\HTTP\CURLRequest->sendRequest([...])
+ 3 SYSTEMPATH\HTTP\CURLRequest.php(150): CodeIgniter\HTTP\CURLRequest->send('GET', 'http://www.omdbapi.com/?t=Titanic&apikey=SUA_CHAVE_OMDB_AQUI&plot=full')
+ 4 SYSTEMPATH\HTTP\CURLRequest.php(185): CodeIgniter\HTTP\CURLRequest->request('GET', 'http://www.omdbapi.com/?t=Titanic&apikey=SUA_CHAVE_OMDB_AQUI&plot=full', [])
+ 5 APPPATH\Controllers\Producao.php(92): CodeIgniter\HTTP\CURLRequest->get('http://www.omdbapi.com/?t=Titanic&apikey=SUA_CHAVE_OMDB_AQUI&plot=full')
+ 6 APPPATH\Controllers\Producao.php(40): App\Controllers\Producao->fetchMovieData('Titanic')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Producao->store()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Producao))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')

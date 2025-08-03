@@ -22,6 +22,9 @@
         <th>Comentário</th>
         <th>Status</th>
         <th>Duração (minutos)</th> <!-- nova coluna -->
+        <th>Pôster</th>
+<th>Diretor</th>
+<th>Elenco</th>
         <th>Ações</th>
     </tr>
 </thead>
@@ -34,6 +37,14 @@
             <td><?= $producao['comentario'] ?></td>
             <td><?= $producao['status'] ?></td>
             <td><?= $producao['duracao'] ?? '-' ?></td> <!-- exibe duração -->
+            <td>
+    <?php if (!empty($producao['poster'])): ?>
+        <img src="<?= esc($producao['poster']) ?>" style="height:80px;">
+    <?php endif; ?>
+</td>
+<td><?= esc($producao['diretor']) ?></td>
+<td><?= esc($producao['elenco']) ?></td>
+
             <td>
                 <?= anchor('producao/edit/'.$producao['id'], 'Editar') ?> |
                 <?= anchor('producao/delete/'.$producao['id'], 'Excluir', ['onclick' => 'return confirma()']) ?>

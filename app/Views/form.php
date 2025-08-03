@@ -45,6 +45,28 @@ form.php:
     <input type="number" name="duracao" id="duracao" class="form-control" value="<?= esc($producao['duracao'] ?? '') ?>">
 </div>
 
+<div class="formgroup">
+    <label for="diretor">Diretor</label>
+    <input type="text" name="diretor" id="diretor" class="form-control" value="<?= esc($producao['diretor'] ?? '') ?>" readonly>
+</div>
+
+<div class="formgroup">
+    <label for="elenco">Elenco</label>
+    <textarea name="elenco" id="elenco" class="form-control" readonly><?= esc($producao['elenco'] ?? '') ?></textarea>
+</div>
+
+<div class="formgroup">
+    <label for="sinopse">Sinopse</label>
+    <textarea name="sinopse" id="sinopse" class="form-control" readonly><?= esc($producao['sinopse'] ?? '') ?></textarea>
+</div>
+
+<?php if (!empty($producao['poster'])): ?>
+    <div class="formgroup">
+        <label>Poster</label><br>
+        <img src="<?= esc($producao['poster']) ?>" alt="Pôster" style="max-width:200px;">
+    </div>
+<?php endif; ?>
+
 
         <button type="submit" class="btn btn-primary"><?= $isEdit ? 'Atualizar' : 'Salvar' ?></button>
         <?= form_close(); ?>
