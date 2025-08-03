@@ -14,8 +14,9 @@ class ProducaoModel extends Model
     protected $protectFields    = true;
     protected $allowedFields = [
     'filme', 'nota', 'comentario', 'status', 'duracao',
-    'diretor', 'elenco', 'poster', 'sinopse'
+    'diretor', 'elenco', 'poster', 'sinopse', 'generos' // <- AQUI
 ];
+
 
 
     protected bool $allowEmptyInserts = false;

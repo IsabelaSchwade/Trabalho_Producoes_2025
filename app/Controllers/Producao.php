@@ -69,18 +69,75 @@ class Producao extends BaseController
         }
     }
 
-    public function recomendacoes()
+   public function recomendacoes()
 {
-    // Soma das durações apenas de filmes assistidos
+    // Passo 1: Gêneros com notas altas
+    $producoes = $this->producaoModel
+        ->select('generos')
+        ->where('nota >=', 7.0)
+        ->findAll();
+
+    $generoCount = [];
+
+    foreach ($producoes as $p) {
+        if (!empty($p['generos'])) {
+            $generos = explode(',', $p['generos']);
+            foreach ($generos as $genero) {
+                $genero = trim($genero);
+                $generoCount[$genero] = ($generoCount[$genero] ?? 0) + 1;
+            }
+        }
+    }
+
+    arsort($generoCount);
+    $generosFavoritos = array_keys(array_slice($generoCount, 0, 3)); // top 3
+
+    // Passo 2: Buscar recomendações da OMDb com base nos gêneros
+    $recomendacoes = [];
+    foreach ($generosFavoritos as $genero) {
+        $filme = $this->buscarFilmePorGenero($genero);
+        if ($filme) {
+            $recomendacoes[] = $filme;
+        }
+    }
+
+    // Passo 3: Total de minutos assistidos
     $totalMinutos = $this->producaoModel
         ->selectSum('duracao')
         ->where('status', 'assistido')
         ->first()['duracao'];
 
     return view('recomendacoes', [
-        'totalMinutos' => $totalMinutos ?? 0
+        'totalMinutos' => $totalMinutos ?? 0,
+        'recomendacoes' => $recomendacoes
     ]);
 }
+
+private function buscarFilmePorGenero($genero)
+{
+    $apiKey = 'a0013cdf';
+    $termos = urlencode($genero);
+    $url = "http://www.omdbapi.com/?s={$termos}&type=movie&apikey={$apiKey}";
+
+    $client = \Config\Services::curlrequest();
+    $response = $client->get($url);
+
+    if ($response->getStatusCode() === 200) {
+        $data = json_decode($response->getBody(), true);
+
+        if (!empty($data['Search'])) {
+            $filme = $data['Search'][0]; // pegar o primeiro resultado
+            return [
+                'titulo' => $filme['Title'],
+                'ano' => $filme['Year'],
+                'poster' => $filme['Poster']
+            ];
+        }
+    }
+
+    return null;
+}
+
 
 private function fetchMovieData($titulo)
 {
@@ -100,12 +157,14 @@ private function fetchMovieData($titulo)
                 'elenco' => $data['Actors'] ?? null,
                 'poster' => $data['Poster'] ?? null,
                 'sinopse' => $data['Plot'] ?? null,
+                'generos' => $data['Genre'] ?? null, // <- ADICIONADO AQUI
             ];
         }
     }
 
     return null;
 }
+
 
 
 }
