@@ -13,12 +13,30 @@ class Producao extends BaseController
         $this->producaoModel = new ProducaoModel();
     }
 
-    public function index()
-    {
-        return view('producoes', [
-            'producoes' => $this->producaoModel->findAll()
-        ]);
+public function index($status = null)
+{
+    $query = $this->request->getGet('q');
+
+    $builder = $this->producaoModel;
+
+    if ($status) {
+        $builder = $builder->where('status', $status);
     }
+
+    if ($query) {
+        $builder = $builder->like('filme', $query);
+    }
+
+    $producoes = $builder->findAll();
+
+    return view('producoes', [
+        'producoes' => $producoes,
+        'statusAtual' => $status,
+        'buscaNome' => $query
+    ]);
+}
+
+
 
     public function delete($id){
         if($this->producaoModel->delete($id)){
@@ -69,21 +87,23 @@ class Producao extends BaseController
         }
     }
 
+
+    //------------------------------------------------------------------------------------------------------
    public function recomendacoes()
 {
-    // Passo 1: Gêneros com notas altas
-    $producoes = $this->producaoModel
+    // primeiro selecionar no banco os generos que foram avaliados com notas altas
+    $producoes = $this->producaoModel // ta selecionando o model responsavel por pegar os dados do banco
         ->select('generos')
         ->where('nota >=', 7.0)
-        ->findAll();
+        ->findAll(); // busca todos os generos que atendem os criterios
 
-    $generoCount = [];
+    $generoCount = []; // armazena tudo em um array
 
     foreach ($producoes as $p) {
-        if (!empty($p['generos'])) {
-            $generos = explode(',', $p['generos']);
+        if (!empty($p['generos'])) { // verifica se não tá vazio
+            $generos = explode(',', $p['generos']);// separa a string por vírgula
             foreach ($generos as $genero) {
-                $genero = trim($genero);
+                $genero = trim($genero); // remove espaços extras 
                 $generoCount[$genero] = ($generoCount[$genero] ?? 0) + 1;
             }
         }
@@ -112,6 +132,8 @@ class Producao extends BaseController
         'recomendacoes' => $recomendacoes
     ]);
 }
+
+//----------------------------------------------------------------------------------------
 
 private function buscarFilmePorGenero($genero)
 {
@@ -157,7 +179,7 @@ private function fetchMovieData($titulo)
                 'elenco' => $data['Actors'] ?? null,
                 'poster' => $data['Poster'] ?? null,
                 'sinopse' => $data['Plot'] ?? null,
-                'generos' => $data['Genre'] ?? null, // <- ADICIONADO AQUI
+                'generos' => $data['Genre'] ?? null, // 
             ];
         }
     }
@@ -165,6 +187,37 @@ private function fetchMovieData($titulo)
     return null;
 }
 
+public function search()
+{
+    $termo = $this->request->getGet('q'); // pega parâmetro "q" da URL
+    $producoes = [];
+
+    if ($termo) {
+        $producoes = $this->producaoModel
+            ->like('filme', $termo) // pesquisa pelo título
+            ->findAll();
+    }
+
+    return view('producoes', [
+        'producoes' => $producoes,
+        'termo' => $termo
+    ]);
+}
+
+public function view($id)
+{
+    $producao = $this->producaoModel->find($id);
+
+    if (!$producao) {
+        return view('messages', [
+            'message' => 'Produção não encontrada!'
+        ]);
+    }
+
+    return view('visualizar_filme', [
+        'producao' => $producao
+    ]);
+}
 
 
 }

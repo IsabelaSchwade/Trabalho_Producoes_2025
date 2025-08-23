@@ -1,0 +1,13 @@
+CRITICAL - 2025-08-23 19:59:23 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "visualizar_filme.php"
+[Method: GET, Route: producao/view/12]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(214): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('visualizar_filme.php')
+ 2 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('visualizar_filme', [], true)
+ 3 APPPATH\Controllers\Producao.php(217): view('visualizar_filme', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Producao->view('12')
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Producao))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')

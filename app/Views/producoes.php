@@ -3,34 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <title>Produções</title>
+    <style>
+        #resultadosBusca {
+            border: 1px solid #ccc;
+            background: #fff;
+            position: absolute;
+            z-index: 1000;
+            max-height: 250px;
+            overflow-y: auto;
+            width: 300px;
+        }
+        #resultadosBusca div {
+            padding: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        #resultadosBusca div:hover {
+            background: #f0f0f0;
+        }
+        #resultadosBusca img {
+            height: 50px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
-<script>
-    function confirma(){
-        return confirm('Deseja excluir esta produção?');
-    }
-</script>
 <body>
-    <div class="container">
-        <?= anchor(base_url('producao/create'), 'Nova Produção', ['class' => 'btn btn-success']) ?>
-        <?= anchor(base_url('recomendacoes'), 'Recomendações', ['class' => 'btn btn-info', 'style' => 'margin-left:10px;']) ?>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Filme</th>
-                    <th>Nota</th>
-                    <th>Comentário</th>
-                    <th>Status</th>
-                    <th>Duração (minutos)</th>
-                    <th>Pôster</th>
-                    <th>Diretor</th>
-                    <th>Elenco</th>
-                    <th>Gêneros</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($producoes as $producao): ?>
+<div class="container">
+    <!-- Botões principais -->
+    <?= anchor(base_url('producao/create'), 'Nova Produção', ['class' => 'btn btn-success']) ?>
+    <?= anchor(base_url('recomendacoes'), 'Recomendações', ['class' => 'btn btn-info', 'style' => 'margin-left:10px;']) ?>
+
+    <!-- Filtro por status -->
+    <div class="form-group" style="margin: 20px 0;">
+        <label for="filtroStatus"><strong>Filtrar por Status:</strong></label>
+        <select id="filtroStatus" class="form-control" style="width:200px; display:inline-block; margin-left:10px;">
+            <option value="<?= base_url('producoes') ?>" <?= empty($statusAtual) ? 'selected' : '' ?>>Todos</option>
+            <option value="<?= base_url('producoes/assistido') ?>" <?= ($statusAtual ?? '') === 'assistido' ? 'selected' : '' ?>>Assistido</option>
+            <option value="<?= base_url('producoes/planejado') ?>" <?= ($statusAtual ?? '') === 'planejado' ? 'selected' : '' ?>>Planejado</option>
+            <option value="<?= base_url('producoes/em andamento') ?>" <?= ($statusAtual ?? '') === 'em andamento' ? 'selected' : '' ?>>Em andamento</option>
+            <option value="<?= base_url('producoes/abandonado') ?>" <?= ($statusAtual ?? '') === 'abandonado' ? 'selected' : '' ?>>Abandonado</option>
+        </select>
+    </div>
+
+    <script>
+        document.getElementById('filtroStatus').addEventListener('change', function() {
+            window.location.href = this.value;
+        });
+    </script>
+
+    <!-- Campo de pesquisa por nome de filme -->
+    <div class="form-group" style="margin: 20px 0; position: relative;">
+        <label for="buscaFilme"><strong>Pesquisar por Filme:</strong></label>
+        <input type="text" id="buscaFilme" name="q" class="form-control" 
+               style="width:300px; display:inline-block;" 
+               value="<?= esc($buscaNome ?? '') ?>" placeholder="Digite o nome do filme" autocomplete="off">
+        <div id="resultadosBusca" style="display:none;"></div>
+    </div>
+
+    <script>
+        // Autocomplete da OMDb
+        document.getElementById("buscaFilme").addEventListener("keyup", function() {
+            let query = this.value;
+            if(query.length < 3){
+                document.getElementById("resultadosBusca").style.display = "none";
+                return;
+            }
+
+            fetch("<?= base_url('producao/search') ?>?q=" + encodeURIComponent(query))
+                .then(res => res.json())
+                .then(data => {
+                    let resultadosDiv = document.getElementById("resultadosBusca");
+                    resultadosDiv.innerHTML = "";
+                    if(data.length > 0){
+                        data.forEach(filme => {
+                            let item = document.createElement("div");
+                            item.innerHTML = `<img src="${filme.poster}" onerror="this.style.display='none'"> ${filme.titulo} (${filme.ano})`;
+                            item.addEventListener("click", function(){
+                                document.getElementById("buscaFilme").value = filme.titulo;
+                                resultadosDiv.style.display = "none";
+                            });
+                            resultadosDiv.appendChild(item);
+                        });
+                        resultadosDiv.style.display = "block";
+                    } else {
+                        resultadosDiv.style.display = "none";
+                    }
+                });
+        });
+
+        // Enter envia para filtrar pelo banco
+        document.getElementById("buscaFilme").addEventListener("keydown", function(e){
+            if(e.key === "Enter"){
+                e.preventDefault();
+                let nome = this.value.trim();
+                if(nome){
+                    let statusParam = "<?= $statusAtual ?? '' ?>";
+                    let url = "<?= base_url('producoes') ?>";
+                    if(statusParam) url += "/" + encodeURIComponent(statusParam);
+                    window.location.href = url + "?q=" + encodeURIComponent(nome);
+                }
+            }
+        });
+    </script>
+
+    <!-- Título dinâmico -->
+    <h2>
+        <?php if (!empty($statusAtual)): ?>
+            Listando produções com status: <strong><?= ucfirst($statusAtual) ?></strong>
+        <?php else: ?>
+            Listando todas as produções
+        <?php endif; ?>
+        <?php if (!empty($buscaNome)): ?>
+            | Pesquisando por: <strong><?= esc($buscaNome) ?></strong>
+        <?php endif; ?>
+    </h2>
+
+    <!-- Tabela de produções -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Filme</th>
+                <th>Nota</th>
+                <th>Comentário</th>
+                <th>Status</th>
+                <th>Duração (minutos)</th>
+                <th>Pôster</th>
+                <th>Diretor</th>
+                <th>Elenco</th>
+                <th>Gêneros</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if(!empty($producoes)): ?>
+                <?php foreach($producoes as $producao): ?>
                     <tr>
                         <td><?= $producao['id'] ?></td>
                         <td><?= $producao['filme'] ?></td>
@@ -39,7 +147,7 @@
                         <td><?= $producao['status'] ?></td>
                         <td><?= $producao['duracao'] ?? '-' ?></td>
                         <td>
-                            <?php if (!empty($producao['poster'])): ?>
+                            <?php if(!empty($producao['poster'])): ?>
                                 <img src="<?= esc($producao['poster']) ?>" style="height:80px;">
                             <?php endif; ?>
                         </td>
@@ -47,13 +155,19 @@
                         <td><?= esc($producao['elenco']) ?></td>
                         <td><?= esc($producao['generos']) ?></td>
                         <td>
+                              <?= anchor('producao/view/'.$producao['id'], 'Visualizar Filme') ?> |
                             <?= anchor('producao/edit/'.$producao['id'], 'Editar') ?> |
-                            <?= anchor('producao/delete/'.$producao['id'], 'Excluir', ['onclick' => 'return confirma()']) ?>
+                            <?= anchor('producao/delete/'.$producao['id'], 'Excluir', ['onclick'=>'return confirma()']) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
+            <?php else: ?>
+                <tr>
+                    <td colspan="11">Nenhuma produção encontrada.</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
