@@ -3,39 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Produções</title>
-    <style>
-        #resultadosBusca {
-            border: 1px solid #ccc;
-            background: #fff;
-            position: absolute;
-            z-index: 1000;
-            max-height: 250px;
-            overflow-y: auto;
-            width: 300px;
-        }
-        #resultadosBusca div {
-            padding: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-        }
-        #resultadosBusca div:hover {
-            background: #f0f0f0;
-        }
-        #resultadosBusca img {
-            height: 50px;
-            margin-right: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 </head>
 <body>
 <div class="container">
     <!-- Botões principais -->
-    <?= anchor(base_url('producao/create'), 'Nova Produção', ['class' => 'btn btn-success']) ?>
-    <?= anchor(base_url('recomendacoes'), 'Recomendações', ['class' => 'btn btn-info', 'style' => 'margin-left:10px;']) ?>
+    <div style="margin-bottom:20px;">
+        <?= anchor(base_url('producao/create'), 'Nova Produção', ['class' => 'btn btn-success']) ?>
+        <?= anchor(base_url('recomendacoes'), 'Recomendações', ['class' => 'btn btn-info', 'style' => 'margin-left:10px;']) ?>
+    </div>
 
     <!-- Filtro por status -->
-    <div class="form-group" style="margin: 20px 0;">
+    <div class="form-group" style="margin-bottom:20px;">
         <label for="filtroStatus"><strong>Filtrar por Status:</strong></label>
         <select id="filtroStatus" class="form-control" style="width:200px; display:inline-block; margin-left:10px;">
             <option value="<?= base_url('producoes') ?>" <?= empty($statusAtual) ? 'selected' : '' ?>>Todos</option>
@@ -52,8 +31,8 @@
         });
     </script>
 
-    <!-- Campo de pesquisa por nome de filme -->
-    <div class="form-group" style="margin: 20px 0; position: relative;">
+    <!-- Pesquisa por filme -->
+    <div class="form-group" style="margin-bottom:20px; position: relative;">
         <label for="buscaFilme"><strong>Pesquisar por Filme:</strong></label>
         <input type="text" id="buscaFilme" name="q" class="form-control" 
                style="width:300px; display:inline-block;" 
@@ -62,14 +41,12 @@
     </div>
 
     <script>
-        // Autocomplete da OMDb
         document.getElementById("buscaFilme").addEventListener("keyup", function() {
             let query = this.value;
             if(query.length < 3){
                 document.getElementById("resultadosBusca").style.display = "none";
                 return;
             }
-
             fetch("<?= base_url('producao/search') ?>?q=" + encodeURIComponent(query))
                 .then(res => res.json())
                 .then(data => {
@@ -92,7 +69,6 @@
                 });
         });
 
-        // Enter envia para filtrar pelo banco
         document.getElementById("buscaFilme").addEventListener("keydown", function(e){
             if(e.key === "Enter"){
                 e.preventDefault();
@@ -128,7 +104,7 @@
                 <th>Nota</th>
                 <th>Comentário</th>
                 <th>Status</th>
-                <th>Duração (minutos)</th>
+                <th>Duração (min)</th>
                 <th>Pôster</th>
                 <th>Diretor</th>
                 <th>Elenco</th>
@@ -155,9 +131,9 @@
                         <td><?= esc($producao['elenco']) ?></td>
                         <td><?= esc($producao['generos']) ?></td>
                         <td>
-                              <?= anchor('producao/view/'.$producao['id'], 'Visualizar Filme') ?> |
+                            <?= anchor('producao/view/'.$producao['id'], 'Visualizar Filme') ?> |
                             <?= anchor('producao/edit/'.$producao['id'], 'Editar') ?> |
-                            <?= anchor('producao/delete/'.$producao['id'], 'Excluir', ['onclick'=>'return confirma()']) ?>
+                            <?= anchor('producao/delete/'.$producao['id'], 'Excluir', ['onclick'=>'return confirm("Deseja realmente excluir?")']) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

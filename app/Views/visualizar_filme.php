@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Visualizar Filme</title>
+    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 </head>
 <body>
-<div class="container">
+<div class="container" id="visualizar_filme">
     <h1><?= esc($producao['filme']) ?></h1>
 
     <?php if (!empty($producao['poster']) && $producao['poster'] !== 'N/A'): ?>
@@ -21,7 +22,7 @@
     <p><strong>Sinopse:</strong> <?= esc($producao['sinopse']) ?></p>
     <p><strong>Gêneros:</strong> <?= esc($producao['generos']) ?></p>
 
-    <p><?= anchor(base_url('producoes'), 'Voltar às produções') ?></p>
+    <p><?= anchor(base_url('producoes'), 'Voltar às produções', ['class'=>'btn btn-info']) ?></p>
 </div>
 </body>
 </html>
