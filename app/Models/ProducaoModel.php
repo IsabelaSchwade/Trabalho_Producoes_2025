@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class ProducaoModel extends Model
 {
-    protected $table            = 'producao';
+    protected $table            = 'filmes';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';

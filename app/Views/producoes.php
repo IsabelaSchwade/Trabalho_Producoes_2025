@@ -4,16 +4,56 @@
     <meta charset="UTF-8">
     <title>Produções</title>
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+    <style>
+        /* Estilos CSS para a nova visualização de cards */
+        .movie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+            justify-items: center;
+        }
+
+        .movie-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            text-decoration: none; /* Remove sublinhado do link */
+            color: inherit; /* Mantém a cor do texto padrão */
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+        }
+
+        .movie-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .movie-card-title {
+            margin-top: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-    <!-- Botões principais -->
     <div style="margin-bottom:20px;">
         <?= anchor(base_url('producao/create'), 'Nova Produção', ['class' => 'btn btn-success']) ?>
         <?= anchor(base_url('recomendacoes'), 'Recomendações', ['class' => 'btn btn-info', 'style' => 'margin-left:10px;']) ?>
     </div>
 
-    <!-- Filtro por status -->
     <div class="form-group" style="margin-bottom:20px;">
         <label for="filtroStatus"><strong>Filtrar por Status:</strong></label>
         <select id="filtroStatus" class="form-control" style="width:200px; display:inline-block; margin-left:10px;">
@@ -31,12 +71,11 @@
         });
     </script>
 
-    <!-- Pesquisa por filme -->
     <div class="form-group" style="margin-bottom:20px; position: relative;">
         <label for="buscaFilme"><strong>Pesquisar por Filme:</strong></label>
         <input type="text" id="buscaFilme" name="q" class="form-control" 
-               style="width:300px; display:inline-block;" 
-               value="<?= esc($buscaNome ?? '') ?>" placeholder="Digite o nome do filme" autocomplete="off">
+                style="width:300px; display:inline-block;" 
+                value="<?= esc($buscaNome ?? '') ?>" placeholder="Digite o nome do filme" autocomplete="off">
         <div id="resultadosBusca" style="display:none;"></div>
     </div>
 
@@ -83,7 +122,6 @@
         });
     </script>
 
-    <!-- Título dinâmico -->
     <h2>
         <?php if (!empty($statusAtual)): ?>
             Listando produções com status: <strong><?= ucfirst($statusAtual) ?></strong>
@@ -95,55 +133,22 @@
         <?php endif; ?>
     </h2>
 
-    <!-- Tabela de produções -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Filme</th>
-                <th>Nota</th>
-                <th>Comentário</th>
-                <th>Status</th>
-                <th>Duração (min)</th>
-                <th>Pôster</th>
-                <th>Diretor</th>
-                <th>Elenco</th>
-                <th>Gêneros</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if(!empty($producoes)): ?>
-                <?php foreach($producoes as $producao): ?>
-                    <tr>
-                        <td><?= $producao['id'] ?></td>
-                        <td><?= $producao['filme'] ?></td>
-                        <td><?= $producao['nota'] ?></td>
-                        <td><?= $producao['comentario'] ?></td>
-                        <td><?= $producao['status'] ?></td>
-                        <td><?= $producao['duracao'] ?? '-' ?></td>
-                        <td>
-                            <?php if(!empty($producao['poster'])): ?>
-                                <img src="<?= esc($producao['poster']) ?>" style="height:80px;">
-                            <?php endif; ?>
-                        </td>
-                        <td><?= esc($producao['diretor']) ?></td>
-                        <td><?= esc($producao['elenco']) ?></td>
-                        <td><?= esc($producao['generos']) ?></td>
-                        <td>
-                            <?= anchor('producao/view/'.$producao['id'], 'Visualizar Filme') ?> |
-                            <?= anchor('producao/edit/'.$producao['id'], 'Editar') ?> |
-                            <?= anchor('producao/delete/'.$producao['id'], 'Excluir', ['onclick'=>'return confirm("Deseja realmente excluir?")']) ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <tr>
-                    <td colspan="11">Nenhuma produção encontrada.</td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+    <div class="movie-grid">
+        <?php if(!empty($producoes)): ?>
+            <?php foreach($producoes as $producao): ?>
+                <a href="<?= base_url('producao/view/' . $producao['id']) ?>" class="movie-card">
+                    <?php if(!empty($producao['poster'])): ?>
+                        <img src="<?= esc($producao['poster']) ?>" alt="Pôster do filme <?= esc($producao['filme']) ?>">
+                    <?php endif; ?>
+                    <span class="movie-card-title"><?= esc($producao['filme']) ?></span>
+                </a>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div style="grid-column: 1 / -1; text-align: center;">
+                <p>Nenhuma produção encontrada.</p>
+            </div>
+        <?php endif; ?>
+    </div>
 </div>
 </body>
 </html>
