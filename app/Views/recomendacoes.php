@@ -15,7 +15,7 @@
             echo "Você já assistiu aproximadamente <strong>{$horas} horas e {$minutos} minutos</strong> de filmes!";
         ?>
     </p>
-    <p><?= anchor(base_url('producoes'), 'Voltar às produções', ['class'=>'btn btn-info']) ?></p>
+    <p><?= anchor(base_url('filmes'), 'Voltar aos filmes', ['class'=>'btn btn-info']) ?></p>
 
     <h2>Recomendações com base no seu gosto:</h2>
     <?php if (!empty($recomendacoes)): ?>
@@ -23,8 +23,8 @@
             <?php foreach ($recomendacoes as $filme): ?>
                 <li>
                     <strong><?= esc($filme['titulo']) ?></strong> (<?= esc($filme['ano']) ?>)<br>
-                    <?php if (!empty($filme['poster']) && $filme['poster'] !== 'N/A'): ?>
-                        <img src="<?= esc($filme['poster']) ?>" alt="Pôster de <?= esc($filme['titulo']) ?>">
+                    <?php if (!empty($filme['capa']) && $filme['capa'] !== 'N/A'): ?>
+                        <img src="<?= esc($filme['capa']) ?>" alt="Pôster de <?= esc($filme['titulo']) ?>">
                     <?php endif; ?>
                 </li>
             <?php endforeach; ?>

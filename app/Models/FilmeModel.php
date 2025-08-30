@@ -4,20 +4,18 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProducaoModel extends Model
+class FilmeModel extends Model
 {
-    protected $table            = 'filmes';
+    protected $table            = 'filme';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields = [
-    'filme', 'nota', 'comentario', 'status', 'duracao',
-    'diretor', 'elenco', 'poster', 'sinopse', 'generos' // <- AQUI
-];
-
-
+        'filme', 'nota', 'comentario', 'status', 'duracao',
+        'diretor', 'elenco', 'capa', 'sinopse', 'generos'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -30,5 +28,4 @@ class ProducaoModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
-    
 }

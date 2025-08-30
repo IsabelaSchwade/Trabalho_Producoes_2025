@@ -2,10 +2,9 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Produções</title>
+    <title>Filmes</title>
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
     <style>
-        /* Estilos CSS para a nova visualização de cards */
         .movie-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -19,14 +18,14 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            text-decoration: none; /* Remove sublinhado do link */
-            color: inherit; /* Mantém a cor do texto padrão */
+            text-decoration: none;
+            color: inherit;
             transition: transform 0.2s;
             cursor: pointer;
         }
 
         .movie-card:hover {
-            transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+            transform: scale(1.05);
         }
 
         .movie-card img {
@@ -45,23 +44,33 @@
             text-overflow: ellipsis;
             max-width: 100%;
         }
+
+        #resultadosBusca div {
+            background-color: #f1f1f1;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        #resultadosBusca div:hover {
+            background-color: #ddd;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <div style="margin-bottom:20px;">
-        <?= anchor(base_url('producao/create'), 'Nova Produção', ['class' => 'btn btn-success']) ?>
+        <?= anchor(base_url('filme/formulario'), 'Novo Filme', ['class' => 'btn btn-success']) ?>
         <?= anchor(base_url('recomendacoes'), 'Recomendações', ['class' => 'btn btn-info', 'style' => 'margin-left:10px;']) ?>
     </div>
 
     <div class="form-group" style="margin-bottom:20px;">
         <label for="filtroStatus"><strong>Filtrar por Status:</strong></label>
         <select id="filtroStatus" class="form-control" style="width:200px; display:inline-block; margin-left:10px;">
-            <option value="<?= base_url('producoes') ?>" <?= empty($statusAtual) ? 'selected' : '' ?>>Todos</option>
-            <option value="<?= base_url('producoes/assistido') ?>" <?= ($statusAtual ?? '') === 'assistido' ? 'selected' : '' ?>>Assistido</option>
-            <option value="<?= base_url('producoes/planejado') ?>" <?= ($statusAtual ?? '') === 'planejado' ? 'selected' : '' ?>>Planejado</option>
-            <option value="<?= base_url('producoes/em andamento') ?>" <?= ($statusAtual ?? '') === 'em andamento' ? 'selected' : '' ?>>Em andamento</option>
-            <option value="<?= base_url('producoes/abandonado') ?>" <?= ($statusAtual ?? '') === 'abandonado' ? 'selected' : '' ?>>Abandonado</option>
+            <option value="<?= base_url('filmes') ?>" <?= empty($statusAtual) ? 'selected' : '' ?>>Todos</option>
+            <option value="<?= base_url('filmes/assistido') ?>" <?= ($statusAtual ?? '') === 'assistido' ? 'selected' : '' ?>>Assistido</option>
+            <option value="<?= base_url('filmes/planejado') ?>" <?= ($statusAtual ?? '') === 'planejado' ? 'selected' : '' ?>>Planejado</option>
+            <option value="<?= base_url('filmes/em andamento') ?>" <?= ($statusAtual ?? '') === 'em andamento' ? 'selected' : '' ?>>Em andamento</option>
+            <option value="<?= base_url('filmes/abandonado') ?>" <?= ($statusAtual ?? '') === 'abandonado' ? 'selected' : '' ?>>Abandonado</option>
         </select>
     </div>
 
@@ -76,7 +85,7 @@
         <input type="text" id="buscaFilme" name="q" class="form-control" 
                 style="width:300px; display:inline-block;" 
                 value="<?= esc($buscaNome ?? '') ?>" placeholder="Digite o nome do filme" autocomplete="off">
-        <div id="resultadosBusca" style="display:none;"></div>
+        <div id="resultadosBusca" style="display:none; position:absolute; z-index:1000; width:300px;"></div>
     </div>
 
     <script>
@@ -86,7 +95,7 @@
                 document.getElementById("resultadosBusca").style.display = "none";
                 return;
             }
-            fetch("<?= base_url('producao/search') ?>?q=" + encodeURIComponent(query))
+            fetch("<?= base_url('filmes/search') ?>?q=" + encodeURIComponent(query))
                 .then(res => res.json())
                 .then(data => {
                     let resultadosDiv = document.getElementById("resultadosBusca");
@@ -94,9 +103,9 @@
                     if(data.length > 0){
                         data.forEach(filme => {
                             let item = document.createElement("div");
-                            item.innerHTML = `<img src="${filme.poster}" onerror="this.style.display='none'"> ${filme.titulo} (${filme.ano})`;
+                            item.innerHTML = `<img src="${filme.capa}" onerror="this.style.display='none'" style="height:50px; vertical-align:middle;"> ${filme.filme} (${filme.ano || ''})`;
                             item.addEventListener("click", function(){
-                                document.getElementById("buscaFilme").value = filme.titulo;
+                                document.getElementById("buscaFilme").value = filme.filme;
                                 resultadosDiv.style.display = "none";
                             });
                             resultadosDiv.appendChild(item);
@@ -114,7 +123,7 @@
                 let nome = this.value.trim();
                 if(nome){
                     let statusParam = "<?= $statusAtual ?? '' ?>";
-                    let url = "<?= base_url('producoes') ?>";
+                    let url = "<?= base_url('filmes') ?>";
                     if(statusParam) url += "/" + encodeURIComponent(statusParam);
                     window.location.href = url + "?q=" + encodeURIComponent(nome);
                 }
@@ -124,9 +133,9 @@
 
     <h2>
         <?php if (!empty($statusAtual)): ?>
-            Listando produções com status: <strong><?= ucfirst($statusAtual) ?></strong>
+            Listando filmes com status: <strong><?= ucfirst($statusAtual) ?></strong>
         <?php else: ?>
-            Listando todas as produções
+            Listando todos os filmes
         <?php endif; ?>
         <?php if (!empty($buscaNome)): ?>
             | Pesquisando por: <strong><?= esc($buscaNome) ?></strong>
@@ -134,18 +143,18 @@
     </h2>
 
     <div class="movie-grid">
-        <?php if(!empty($producoes)): ?>
-            <?php foreach($producoes as $producao): ?>
-                <a href="<?= base_url('producao/view/' . $producao['id']) ?>" class="movie-card">
-                    <?php if(!empty($producao['poster'])): ?>
-                        <img src="<?= esc($producao['poster']) ?>" alt="Pôster do filme <?= esc($producao['filme']) ?>">
+        <?php if(!empty($filmes)): ?>
+            <?php foreach($filmes as $filme): ?>
+                <a href="<?= base_url('filme/view/' . $filme['id']) ?>" class="movie-card">
+                    <?php if(!empty($filme['capa']) && $filme['capa'] !== 'N/A'): ?>
+                        <img src="<?= ($filme['capa']) ?>" alt="Pôster do filme <?= esc($filme['filme']) ?>">
                     <?php endif; ?>
-                    <span class="movie-card-title"><?= esc($producao['filme']) ?></span>
+                    <span class="movie-card-title"><?= ($filme['filme']) ?></span>
                 </a>
             <?php endforeach; ?>
         <?php else: ?>
             <div style="grid-column: 1 / -1; text-align: center;">
-                <p>Nenhuma produção encontrada.</p>
+                <p>Nenhum filme encontrado.</p>
             </div>
         <?php endif; ?>
     </div>

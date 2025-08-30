@@ -5,19 +5,17 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Producao::index');
-$routes->get('/producoes', 'Producao::index');
+$routes->get('/', 'Filme::index');
+$routes->get('/filmes', 'Filme::index');
 
-$routes->get('producao/delete/(:num)', 'Producao::delete/$1');
-$routes->get('producao/edit/(:num)', 'Producao::edit/$1');
+$routes->get('filme/excluir/(:num)', 'Filme::excluir/$1');
+$routes->get('filme/editar/(:num)', 'Filme::editar/$1');
+$routes->post('filme/atualizar/(:num)', 'Filme::atualizar/$1');
+$routes->get('filme/formulario', 'Filme::formulario');
+$routes->post('filme/cadastrar', 'Filme::cadastrar');
+$routes->get('recomendacoes', 'Filme::recomendacoes');
+$routes->get('filmes/search', 'Filme::search');
+$routes->get('filme/view/(:num)', 'Filme::view/$1');
 
-$routes->post('producao/update/(:num)', 'Producao::update/$1');
-$routes->get('producao/create', 'Producao::create');
-$routes->post('producao/store', 'Producao::store');
-$routes->get('recomendacoes', 'Producao::recomendacoes');
-$routes->get('producoes/search', 'Producao::search');
-$routes->get('producoes/(:any)', 'Producao::index/$1');
-$routes->get('producao/view/(:num)', 'Producao::view/$1');
-
-
-
+// ⚠️ Deixe essa por último (genérica)
+$routes->get('filmes/(:any)', 'Filme::index/$1');

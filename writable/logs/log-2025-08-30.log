@@ -84,3 +84,182 @@ in SYSTEMPATH\HTTP\CURLRequest.php on line 699.
 11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
 13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')
+ERROR - 2025-08-30 23:16:32 --> mysqli_sql_exception: Unknown column 'poster' in 'field list' in C:\xampp\htdocs\Trabalho_Producoes_2025\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `fi...', 0)
+#1 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `fi...')
+#2 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `fi...')
+#3 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `fi...', Array, false)
+#4 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\Trabalho_Producoes_2025\system\BaseModel.php(838): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Model.php(797): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\xampp\htdocs\Trabalho_Producoes_2025\system\BaseModel.php(751): CodeIgniter\Model->insert(Array, false)
+#8 C:\xampp\htdocs\Trabalho_Producoes_2025\app\Controllers\Filme.php(67): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\Trabalho_Producoes_2025\system\CodeIgniter.php(933): App\Controllers\Filme->cadastrar()
+#10 C:\xampp\htdocs\Trabalho_Producoes_2025\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+#11 C:\xampp\htdocs\Trabalho_Producoes_2025\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\xampp\htdocs\Trabalho_Producoes_2025\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\xampp\htdocs\Trabalho_Producoes_2025\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#16 {main}
+CRITICAL - 2025-08-30 23:16:32 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'poster' in 'field list'
+[Method: POST, Route: filme/cadastrar]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `filme` (`filme`, `nota`, `comentario`, `status`, `duracao`, `diretor`, `elenco`, `poster`, `sinopse`, `generos`) VALUES (:filme:, :nota:, :comentario:, :status:, :duracao:, :diretor:, :elenco:, :poster:, :sinopse:, :generos:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\Filme.php(67): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Filme->cadastrar()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')
+CRITICAL - 2025-08-30 23:16:32 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'poster' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `filme` (`filme`, `nota`, `comentario`, `status`, `duracao`, `diretor`, `elenco`, `poster`, `sinopse`, `generos`) VALUES (\'frozen\', \'10\', \'maravilhoso\', \'assistido\', \'89\', \'Chris Buck, Jennifer Lee\', \'Kristen Bell, Idina Menzel, Jonathan Groff\', \'https://m.media-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg\', \'Fearless optimist Anna teams up with rugged mountain man Kristoff and his loyal reindeer Sven and sets off on an epic journey to find her sister Elsa, whose icy powers have trapped the kingdom of Arendelle in eternal winter. Encountering Everest-like conditions, mystical trolls and a hilarious snowman named Olaf, Anna and Kristoff battle the elements in a race to save the kingdom. From the outside Elsa looks poised, regal and reserved, but in reality she lives in fear as she wrestles with a mighty secret: she was born with the power to create ice and snow. It\\\'s a beautiful ability, but also extremely dangerous. Haunted by the moment her magic nearly killed her younger sister Anna, Elsa has isolated herself, spending every waking minute trying to suppress her growing powers. Her mounting emotions trigger the magic, accidentally setting off an eternal winter that she can\\\'t stop. She fears she\\\'s becoming a monster and that no one, not even her sister, can help her.\', \'Animation, Adventure, Comedy\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `filme` (`filme`, `nota`, `comentario`, `status`, `duracao`, `diretor`, `elenco`, `poster`, `sinopse`, `generos`) VALUES (\'frozen\', \'10\', \'maravilhoso\', \'assistido\', \'89\', \'Chris Buck, Jennifer Lee\', \'Kristen Bell, Idina Menzel, Jonathan Groff\', \'https://m.media-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg\', \'Fearless optimist Anna teams up with rugged mountain man Kristoff and his loyal reindeer Sven and sets off on an epic journey to find her sister Elsa, whose icy powers have trapped the kingdom of Arendelle in eternal winter. Encountering Everest-like conditions, mystical trolls and a hilarious snowman named Olaf, Anna and Kristoff battle the elements in a race to save the kingdom. From the outside Elsa looks poised, regal and reserved, but in reality she lives in fear as she wrestles with a mighty secret: she was born with the power to create ice and snow. It\\\'s a beautiful ability, but also extremely dangerous. Haunted by the moment her magic nearly killed her younger sister Anna, Elsa has isolated herself, spending every waking minute trying to suppress her growing powers. Her mounting emotions trigger the magic, accidentally setting off an eternal winter that she can\\\'t stop. She fears she\\\'s becoming a monster and that no one, not even her sister, can help her.\', \'Animation, Adventure, Comedy\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `filme` (`filme`, `nota`, `comentario`, `status`, `duracao`, `diretor`, `elenco`, `poster`, `sinopse`, `generos`) VALUES (:filme:, :nota:, :comentario:, :status:, :duracao:, :diretor:, :elenco:, :poster:, :sinopse:, :generos:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\Filme.php(67): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Filme->cadastrar()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')
+CRITICAL - 2025-08-30 23:16:32 --> [Caused by] mysqli_sql_exception: Unknown column 'poster' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `filme` (`filme`, `nota`, `comentario`, `status`, `duracao`, `diretor`, `elenco`, `poster`, `sinopse`, `generos`) VALUES (\'frozen\', \'10\', \'maravilhoso\', \'assistido\', \'89\', \'Chris Buck, Jennifer Lee\', \'Kristen Bell, Idina Menzel, Jonathan Groff\', \'https://m.media-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg\', \'Fearless optimist Anna teams up with rugged mountain man Kristoff and his loyal reindeer Sven and sets off on an epic journey to find her sister Elsa, whose icy powers have trapped the kingdom of Arendelle in eternal winter. Encountering Everest-like conditions, mystical trolls and a hilarious snowman named Olaf, Anna and Kristoff battle the elements in a race to save the kingdom. From the outside Elsa looks poised, regal and reserved, but in reality she lives in fear as she wrestles with a mighty secret: she was born with the power to create ice and snow. It\\\'s a beautiful ability, but also extremely dangerous. Haunted by the moment her magic nearly killed her younger sister Anna, Elsa has isolated herself, spending every waking minute trying to suppress her growing powers. Her mounting emotions trigger the magic, accidentally setting off an eternal winter that she can\\\'t stop. She fears she\\\'s becoming a monster and that no one, not even her sister, can help her.\', \'Animation, Adventure, Comedy\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `filme` (`filme`, `nota`, `comentario`, `status`, `duracao`, `diretor`, `elenco`, `poster`, `sinopse`, `generos`) VALUES (\'frozen\', \'10\', \'maravilhoso\', \'assistido\', \'89\', \'Chris Buck, Jennifer Lee\', \'Kristen Bell, Idina Menzel, Jonathan Groff\', \'https://m.media-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg\', \'Fearless optimist Anna teams up with rugged mountain man Kristoff and his loyal reindeer Sven and sets off on an epic journey to find her sister Elsa, whose icy powers have trapped the kingdom of Arendelle in eternal winter. Encountering Everest-like conditions, mystical trolls and a hilarious snowman named Olaf, Anna and Kristoff battle the elements in a race to save the kingdom. From the outside Elsa looks poised, regal and reserved, but in reality she lives in fear as she wrestles with a mighty secret: she was born with the power to create ice and snow. It\\\'s a beautiful ability, but also extremely dangerous. Haunted by the moment her magic nearly killed her younger sister Anna, Elsa has isolated herself, spending every waking minute trying to suppress her growing powers. Her mounting emotions trigger the magic, accidentally setting off an eternal winter that she can\\\'t stop. She fears she\\\'s becoming a monster and that no one, not even her sister, can help her.\', \'Animation, Adventure, Comedy\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `filme` (`filme`, `nota`, `comentario`, `status`, `duracao`, `diretor`, `elenco`, `poster`, `sinopse`, `generos`) VALUES (\'frozen\', \'10\', \'maravilhoso\', \'assistido\', \'89\', \'Chris Buck, Jennifer Lee\', \'Kristen Bell, Idina Menzel, Jonathan Groff\', \'https://m.media-amazon.com/images/M/MV5BMTQ1MjQwMTE5OF5BMl5BanBnXkFtZTgwNjk3MTcyMDE@._V1_SX300.jpg\', \'Fearless optimist Anna teams up with rugged mountain man Kristoff and his loyal reindeer Sven and sets off on an epic journey to find her sister Elsa, whose icy powers have trapped the kingdom of Arendelle in eternal winter. Encountering Everest-like conditions, mystical trolls and a hilarious snowman named Olaf, Anna and Kristoff battle the elements in a race to save the kingdom. From the outside Elsa looks poised, regal and reserved, but in reality she lives in fear as she wrestles with a mighty secret: she was born with the power to create ice and snow. It\\\'s a beautiful ability, but also extremely dangerous. Haunted by the moment her magic nearly killed her younger sister Anna, Elsa has isolated herself, spending every waking minute trying to suppress her growing powers. Her mounting emotions trigger the magic, accidentally setting off an eternal winter that she can\\\'t stop. She fears she\\\'s becoming a monster and that no one, not even her sister, can help her.\', \'Animation, Adventure, Comedy\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `filme` (`filme`, `nota`, `comentario`, `status`, `duracao`, `diretor`, `elenco`, `poster`, `sinopse`, `generos`) VALUES (:filme:, :nota:, :comentario:, :status:, :duracao:, :diretor:, :elenco:, :poster:, :sinopse:, :generos:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(838): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(797): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(751): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Filme.php(67): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Filme->cadastrar()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')
+CRITICAL - 2025-08-30 23:21:32 --> ErrorException: Undefined array key "generos"
+[Method: GET, Route: filme/view/1]
+in APPPATH\Views\visualizar_filme.php on line 23.
+ 1 APPPATH\Views\visualizar_filme.php(23): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "generos"', 'C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\app\\Views\\visualizar_filme.php', 23)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\app\\Views\\visualizar_filme.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('visualizar_filme', [], true)
+ 5 APPPATH\Controllers\Filme.php(206): view('visualizar_filme', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Filme->view('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')
+CRITICAL - 2025-08-30 23:21:59 --> ErrorException: Undefined array key "generos"
+[Method: GET, Route: filme/view/1]
+in APPPATH\Views\visualizar_filme.php on line 23.
+ 1 APPPATH\Views\visualizar_filme.php(23): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "generos"', 'C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\app\\Views\\visualizar_filme.php', 23)
+ 2 SYSTEMPATH\View\View.php(226): include('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\app\\Views\\visualizar_filme.php')
+ 3 SYSTEMPATH\View\View.php(229): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1167): CodeIgniter\View\View->render('visualizar_filme', [], true)
+ 5 APPPATH\Controllers\Filme.php(206): view('visualizar_filme', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Filme->view('1')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')
+ERROR - 2025-08-30 23:23:00 --> mysqli_sql_exception: Unknown column 'generos' in 'field list' in C:\xampp\htdocs\Trabalho_Producoes_2025\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `generos...', 0)
+#1 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `generos...')
+#2 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `generos...')
+#3 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `generos...', Array, false)
+#4 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\Trabalho_Producoes_2025\system\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\Trabalho_Producoes_2025\app\Controllers\Filme.php(95): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\Trabalho_Producoes_2025\system\CodeIgniter.php(933): App\Controllers\Filme->recomendacoes()
+#8 C:\xampp\htdocs\Trabalho_Producoes_2025\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+#9 C:\xampp\htdocs\Trabalho_Producoes_2025\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Boot.php(363): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\Trabalho_Producoes_2025\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\Trabalho_Producoes_2025\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\xampp\htdocs\Trabalho_Producoes_2025\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+CRITICAL - 2025-08-30 23:23:00 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'generos' in 'field list'
+[Method: GET, Route: recomendacoes]
+in SYSTEMPATH\Database\BaseConnection.php on line 684.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `generos`
+FROM `filme`
+WHERE `nota` >= :nota:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Filme.php(95): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Filme->recomendacoes()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')
+CRITICAL - 2025-08-30 23:23:00 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'generos' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `generos`
+FROM `filme`
+WHERE `nota` >= 7')
+ 2 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `generos`
+FROM `filme`
+WHERE `nota` >= 7')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `generos`
+FROM `filme`
+WHERE `nota` >= :nota:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Filme.php(95): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Filme->recomendacoes()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')
+CRITICAL - 2025-08-30 23:23:00 --> [Caused by] mysqli_sql_exception: Unknown column 'generos' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `generos`
+FROM `filme`
+WHERE `nota` >= 7', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(729): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `generos`
+FROM `filme`
+WHERE `nota` >= 7')
+ 3 SYSTEMPATH\Database\BaseConnection.php(646): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `generos`
+FROM `filme`
+WHERE `nota` >= 7')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `generos`
+FROM `filme`
+WHERE `nota` >= :nota:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(677): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Filme.php(95): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Filme->recomendacoes()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Filme))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(363): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\Trabalho_Producoes_2025\\public\\index.php')
+DEBUG - 2025-08-30 23:38:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
