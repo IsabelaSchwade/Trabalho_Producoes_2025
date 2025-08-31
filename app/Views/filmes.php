@@ -4,59 +4,10 @@
     <meta charset="UTF-8">
     <title>Filmes</title>
     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
-    <style>
-        .movie-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-            padding: 20px 0;
-            justify-items: center;
-        }
-
-        .movie-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.2s;
-            cursor: pointer;
-        }
-
-        .movie-card:hover {
-            transform: scale(1.05);
-        }
-
-        .movie-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .movie-card-title {
-            margin-top: 10px;
-            font-size: 1.1em;
-            font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
-        }
-
-        #resultadosBusca div {
-            background-color: #f1f1f1;
-            padding: 5px;
-            cursor: pointer;
-        }
-
-        #resultadosBusca div:hover {
-            background-color: #ddd;
-        }
-    </style>
+    
 </head>
 <body>
+    <h1> Filmes</h2>
 <div class="container">
     <div style="margin-bottom:20px;">
         <?= anchor(base_url('filme/formulario'), 'Novo Filme', ['class' => 'btn btn-success']) ?>

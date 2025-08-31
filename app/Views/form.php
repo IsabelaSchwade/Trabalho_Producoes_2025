@@ -1,4 +1,16 @@
-<?= form_open(isset($filme) ? 'filme/atualizar/' . $filme['id'] : 'filme/cadastrar') ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário</title>
+    <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
+</head>
+<body>
+
+<h1>Formulário</h1>
+<br>
+    <?= form_open(isset($filme) ? 'filme/atualizar/' . $filme['id'] : 'filme/cadastrar') ?>
 
 <div class="form-group">
     <label for="filme">Filme</label>
@@ -35,3 +47,10 @@
 
 <button type="submit" class="btn btn-success"><?= isset($filme) ? 'Atualizar' : 'Salvar' ?></button>
 <?= form_close(); ?>
+<br>
+  <p><?= anchor(base_url('filmes'), 'Voltar aos filmes', ['class'=>'btn btn-info']) ?></p>
+</body>
+</html>
+
+
+

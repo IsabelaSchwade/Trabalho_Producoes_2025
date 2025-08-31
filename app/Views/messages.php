@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Mensagens</title>
+        <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 </head>
 <body>
     <div class="container mt-5">
