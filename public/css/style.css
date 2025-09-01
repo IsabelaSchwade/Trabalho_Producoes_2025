@@ -1,527 +1,232 @@
-/* Reset básico 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px 0;
+}
+/* ==============================
+   Reset básico
+============================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
 }
 
 body {
-    background-color: #f5f5f5;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #faf8f6;
     color: #333;
     line-height: 1.6;
+    padding: 20px;
 }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px 0;
-}
-
-/* Botões estilo streaming 
-.btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.btn-success {
-    background-color: #ff4c4c;
-    color: #fff;
-}
-
-.btn-success:hover {
-    background-color: #e63939;
-}
-
-.btn-info {
-    background-color: #1e90ff;
-    color: #fff;
-}
-
-.btn-info:hover {
-    background-color: #0d6efd;
-}
-
-/* Títulos e subtítulos 
+/* ==============================
+   Cabeçalhos
+============================== */
 h1, h2, h3 {
+    color: #444;
     margin-bottom: 15px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 h1 {
-    font-size: 2.5em;
+    font-size: 2rem;
+    color: #4a4e69;
 }
 
 h2 {
-    font-size: 2em;
-    margin-top: 30px;
+    font-size: 1.5rem;
+    color: #6d6875;
 }
 
-/* Tabela de produções como cards 
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+/* ==============================
+   Container principal
+============================== */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.08);
 }
 
-.table th, .table td {
-    padding: 12px;
-    text-align: left;
-    vertical-align: middle;
-}
-
-.table th {
-    background-color: #e0e0e0;
-    color: #333;
-}
-
-.table tr {
-    background-color: #fafafa;
-    transition: 0.3s;
-}
-
-.table tr:hover {
-    background-color: #f0f0f0;
-}
-
-.table img {
-    max-height: 80px;
-    border-radius: 5px;
-}
-
-/* Inputs e selects 
-input[type="text"], input[type="number"], textarea, select {
-    width: 100%;
-    padding: 8px 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    outline: none;
-    background-color: #fff;
-    color: #333;
-}
-
-textarea {
-    resize: vertical;
-}
-
-label {
-    font-weight: bold;
-}
-
-/* Cards de recomendação 
-ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 0;
-}
-
-ul li {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 15px;
-    flex: 1 1 200px;
-    max-width: 250px;
-    transition: 0.3s;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-ul li:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-ul li img {
-    max-height: 150px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-/* Mensagens e alertas 
-.alert {
-    background-color: #e0f7fa;
-    border-left: 5px solid #00acc1;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    color: #006064;
-}
-
-/* Pesquisa 
-#resultadosBusca {
-    border: 1px solid #ccc;
-    background: #fff;
-    position: absolute;
-    z-index: 1000;
-    max-height: 250px;
-    overflow-y: auto;
-    width: 300px;
-    border-radius: 5px;
-}
-
-#resultadosBusca div {
-    padding: 10px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    color: #333;
-}
-
-#resultadosBusca div:hover {
-    background-color: #f0f0f0;
-}
-
-#resultadosBusca img {
-    height: 50px;
-    margin-right: 10px;
-    border-radius: 5px;
-}
-
-/* Visualização do filme 
-#visualizar_filme img {
-    border-radius: 10px;
-    margin-bottom: 15px;
-}
-
-#visualizar_filme p {
-    margin-bottom: 10px;
-}
-
-/* Responsividade 
-@media (max-width: 768px) {
-    ul li {
-        flex: 1 1 100%;
-        max-width: 100%;
-    }
-
-    .table th, .table td {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
-
-    h2 {
-        font-size: 1.5em;
-    }
-}
-
-.movie-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-            padding: 20px 0;
-            justify-items: center;
-        }
-
-        .movie-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.2s;
-            cursor: pointer;
-        }
-
-        .movie-card:hover {
-            transform: scale(1.05);
-        }
-
-        .movie-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .movie-card-title {
-            margin-top: 10px;
-            font-size: 1.1em;
-            font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 100%;
-        }
-
-        #resultadosBusca div {
-            background-color: #f1f1f1;
-            padding: 5px;
-            cursor: pointer;
-        }
-
-        #resultadosBusca div:hover {
-            background-color: #ddd;
-        }
-
-        h1{
-            text-align: center;
-        }
-*/
-/* ==========================
-   Fonte
-========================== */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Montserrat:wght@400;600&display=swap');
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #f7f7f7;
-    color: #222;
-}
-
-/* ==========================
-   Botões
-========================== */
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-}
-
-.btn-success {
-    background-color: #4caf50;
-    color: #fff;
-}
-
-.btn-success:hover {
-    background-color: #3b8c3b;
-}
-
-.btn-info {
-    background-color: #2196f3;
-    color: #fff;
-}
-
-.btn-info:hover {
-    background-color: #1976d2;
-}
-
-.btn-warning {
-    background-color: #ff9800;
-    color: #fff;
-}
-
-.btn-warning:hover {
-    background-color: #e68900;
-}
-
-.btn-danger {
-    background-color: #f44336;
-    color: #fff;
-}
-
-.btn-danger:hover {
-    background-color: #d32f2f;
-}
-
-/* ==========================
+/* ==============================
    Formulários
-========================== */
+============================== */
 .form-group {
     margin-bottom: 20px;
 }
 
 label {
+    font-weight: bold;
+    color: #555;
     display: block;
-    font-weight: 600;
     margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="number"],
-textarea,
-select {
+input, select, textarea {
     width: 100%;
-    padding: 10px;
-    border-radius: 6px;
+    padding: 10px 12px;
+    border-radius: 10px;
     border: 1px solid #ccc;
+    background: #fffdfd;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #a0c4ff;
     outline: none;
-    font-size: 16px;
-    background-color: #fff;
-    color: #222;
+    background: #f0f8ff;
 }
 
-input::placeholder,
-textarea::placeholder {
-    color: #888;
+/* ==============================
+   Botões
+============================== */
+.btn {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
 }
 
-textarea {
-    min-height: 100px;
+.btn-success {
+    background-color: #a3d2ca;
+    color: #1b4332;
 }
 
-/* ==========================
-   Container
-========================== */
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
+.btn-success:hover {
+    background-color: #80cfa9;
 }
 
-/* ==========================
-   Títulos centralizados
-========================== */
-h1, h2 {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    text-align: center;
+.btn-info {
+    background-color: #cdb4db;
+    color: #3c096c;
 }
 
-h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
+.btn-info:hover {
+    background-color: #b197c2;
 }
 
-h2 {
-    font-size: 28px;
-    margin-top: 30px;
+.btn-warning {
+    background-color: #ffd6a5;
+    color: #7f5539;
 }
 
-/* ==========================
-   Grid de filmes
-========================== */
+.btn-warning:hover {
+    background-color: #ffb677;
+}
+
+.btn-danger {
+    background-color: #ffadad;
+    color: #6a040f;
+}
+
+.btn-danger:hover {
+    background-color: #ff6b6b;
+}
+
+/* ==============================
+   Cards de filmes (grid)
+============================== */
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 20px;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .movie-card {
-    display: block;
-    background-color: #fff;
-    border-radius: 8px;
+    background: #fff;
+    border-radius: 15px;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
     text-decoration: none;
-    color: #222;
-    border: 1px solid #ddd;
+    color: #333;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .movie-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+    box-shadow: 0px 6px 16px rgba(0,0,0,0.12);
 }
 
 .movie-card img {
     width: 100%;
-    display: block;
-    border-bottom: 2px solid #2196f3;
+    height: 220px;
+    object-fit: cover;
 }
 
 .movie-card-title {
     display: block;
-    text-align: center;
+    padding: 10px;
     font-weight: 600;
-    padding: 10px 5px;
+    font-size: 0.95rem;
+    background: #f8edeb;
+    color: #4a4e69;
 }
 
-/* ==========================
-   Busca
-========================== */
-#buscaFilme {
-    border-radius: 6px;
-}
-
+/* ==============================
+   Busca (autocomplete)
+============================== */
 #resultadosBusca {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    max-height: 200px;
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    margin-top: 5px;
+    max-height: 250px;
     overflow-y: auto;
-    border-radius: 6px;
 }
 
 #resultadosBusca div {
-    padding: 8px;
+    padding: 10px;
     cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    transition: background 0.2s ease;
+    font-size: 0.9rem;
 }
 
 #resultadosBusca div:hover {
-    background-color: #f0f0f0;
+    background: #e9ecef;
 }
 
-/* ==========================
-   Imagens no detalhe
-========================== */
-.img-fluid {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-
-/* ==========================
-   Listas de recomendações
-========================== */
+/* ==============================
+   Recomendações
+============================== */
 ul {
     list-style: none;
-    padding: 0;
+    margin-top: 15px;
 }
 
 ul li {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 6px;
+    background: #f1faee;
+    padding: 12px;
+    border-radius: 12px;
     margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    border: 1px solid #ddd;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.05);
 }
 
 ul li img {
-    width: 50px;
-    height: 75px;
-    object-fit: cover;
-    border-radius: 4px;
+    margin-top: 8px;
+    max-height: 120px;
+    border-radius: 8px;
 }
 
-/* ==========================
-   Responsividade
-========================== */
-@media(max-width: 768px){
-    .movie-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    }
-    
-    #buscaFilme {
-        width: 100%;
-    }
-
-    #resultadosBusca {
-        width: 100%;
-    }
+/* ==============================
+   Mensagens
+============================== */
+p {
+    margin-bottom: 12px;
 }
 
-        
+em {
+    color: #888;
+}
