@@ -7,7 +7,7 @@
     
 </head>
 <body>
-    <h1> Filmes</h2>
+    <h1> Isalivix</h2>
 <div class="container">
     <div style="margin-bottom:20px;">
         <?= anchor(base_url('filme/formulario'), 'Novo Filme', ['class' => 'btn btn-success']) ?>
