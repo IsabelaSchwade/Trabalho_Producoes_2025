@@ -10,7 +10,7 @@
     <h1> Isalivix</h2>
 <div class="container">
     <div style="margin-bottom:20px;">
-        <?= anchor(base_url('filme/formulario'), 'Novo Filme', ['class' => 'btn btn-success']) ?>
+        <?= anchor/*funcao do c que cria links*/(base_url('filme/formulario'), 'Novo Filme', ['class' => 'btn btn-success']) ?>
         <?= anchor(base_url('recomendacoes'), 'Recomendações', ['class' => 'btn btn-info', 'style' => 'margin-left:10px;']) ?>
     </div>
 
@@ -27,10 +27,10 @@
 
     <script>
         document.getElementById('filtroStatus').addEventListener('change', function() {
-            window.location.href = this.value;
+            window.location.href = this.value; /* Ao mudar o <select>, a página redireciona automaticamente para a URL correspondente ao status selecionado.*/
         });
     </script>
-
+    
     <div class="form-group" style="margin-bottom:20px; position: relative;">
         <label for="buscaFilme"><strong>Pesquisar por Filme:</strong></label>
         <input type="text" id="buscaFilme" name="q" class="form-control" 

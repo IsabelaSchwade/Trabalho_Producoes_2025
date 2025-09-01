@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Detalhes do Filme</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" href="<?= base_url('css/style.css') ?>">
 </head>
 <body>
 <div class="container mt-4">
     <h1><?= esc($filme['filme'] ?? 'Título não informado') ?></h1>
 
     <?php if (!empty($filme['capa']) && $filme['capa'] !== 'N/A'): ?>
-       <img src="<?= base_url('images/' . esc($filme['capa'])) ?>" alt="Capa do filme <?= esc($filme['filme'] ?? '') ?>" class="img-fluid mb-3" style="max-height:300px;">
+    <div style="text-align: center;">
+        <img src="<?= ($filme['capa']) ?>" alt="Pôster do filme <?= esc($filme['filme']) ?>" style="max-width: 100%; height: auto;">
+    </div>
+<?php else: ?>
+    <div style="text-align: center;">
+        <img src="/caminho/para/imagem-placeholder.jpg" alt="Imagem não disponível" style="max-width: 100%; height: auto;">
+    </div>
+<?php endif; ?>
 
-    <?php else: ?>
-        <p><em>Sem capa disponível</em></p>
-    <?php endif; ?>
+        
 
     <p><strong>Nota:</strong> <?= esc($filme['nota'] ?? 'Não informada') ?></p>
     <p><strong>Status:</strong> <?= esc($filme['status'] ?? 'Não informado') ?></p>
