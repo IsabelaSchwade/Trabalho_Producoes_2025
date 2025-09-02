@@ -7,10 +7,10 @@
     
 </head>
 <body>
-    <h1> Isalivix</h2>
+    <h1> IsaLivix</h2>
 <div class="container">
     <div style="margin-bottom:20px;">
-        <?= anchor/*funcao do c que cria links*/(base_url('filme/formulario'), 'Novo Filme', ['class' => 'btn btn-success']) ?>
+        <?= anchor(base_url('filme/formulario'), 'Novo Filme', ['class' => 'btn btn-success']) ?>
         <?= anchor(base_url('recomendacoes'), 'Recomendações', ['class' => 'btn btn-info', 'style' => 'margin-left:10px;']) ?>
     </div>
 
@@ -97,6 +97,7 @@
         <?php if(!empty($filmes)): ?>
             <?php foreach($filmes as $filme): ?>
                 <a href="<?= base_url('filme/view/' . $filme['id']) ?>" class="movie-card">
+                    
                     <?php if(!empty($filme['capa']) && $filme['capa'] !== 'N/A'): ?>
                         <img src="<?= ($filme['capa']) ?>" alt="Pôster do filme <?= esc($filme['filme']) ?>">
                     <?php endif; ?>

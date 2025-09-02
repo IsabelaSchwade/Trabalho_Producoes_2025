@@ -47,6 +47,7 @@
 
 <button type="submit" class="btn btn-success"><?= isset($filme) ? 'Atualizar' : 'Salvar' ?></button>
 <?= form_close(); ?>
+
 <br>
   <p><?= anchor(base_url('filmes'), 'Voltar aos filmes', ['class'=>'btn btn-info']) ?></p>
 </body>

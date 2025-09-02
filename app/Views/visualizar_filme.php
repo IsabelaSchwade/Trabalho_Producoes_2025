@@ -37,6 +37,7 @@
            class="btn btn-danger"
            onclick="return confirm('Tem certeza que deseja excluir este filme?')">
            Excluir
+           
         </a>
     </p>
 </div>
