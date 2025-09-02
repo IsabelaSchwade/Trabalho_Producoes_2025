@@ -14,22 +14,22 @@
 
 <div class="form-group">
     <label for="filme">Filme</label>
-    <input type="text" name="filme" id="filme" class="form-control" value="<?= esc($filme['filme'] ?? '') ?>">
+    <input type="text" name="filme" id="filme" class="form-control" value="<?= esc($filme['filme'] ?? '') ?>" required>
 </div>
 
 <div class="form-group">
     <label for="nota">Nota</label>
-    <input type="number" step="0.1" name="nota" id="nota" class="form-control" value="<?= esc($filme['nota'] ?? '') ?>">
+    <input type="number" step="0.1" name="nota" id="nota" class="form-control" value="<?= esc($filme['nota'] ?? '') ?>" required>
 </div>
 
 <div class="form-group">
     <label for="comentario">Comentário</label>
-    <textarea name="comentario" id="comentario" class="form-control"><?= esc($filme['comentario'] ?? '') ?></textarea>
+    <textarea name="comentario" id="comentario" class="form-control" required><?= esc($filme['comentario'] ?? '') ?></textarea>
 </div>
 
 <div class="form-group">
     <label for="status">Status</label>
-    <select name="status" id="status" class="form-control">
+    <select name="status" id="status" class="form-control" required>
         <?php
             $statuses = ['assistido', 'planejado', 'em andamento', 'abandonado'];
             foreach ($statuses as $status) {
@@ -42,16 +42,12 @@
 
 <div class="form-group">
     <label for="duracao">Duração (minutos)</label>
-    <input type="number" name="duracao" id="duracao" class="form-control" value="<?= esc($filme['duracao'] ?? '') ?>">
+    <input type="number" name="duracao" id="duracao" class="form-control" value="<?= esc($filme['duracao'] ?? '') ?>" required>
 </div>
 
 <button type="submit" class="btn btn-success"><?= isset($filme) ? 'Atualizar' : 'Salvar' ?></button>
 <?= form_close(); ?>
-
 <br>
   <p><?= anchor(base_url('filmes'), 'Voltar aos filmes', ['class'=>'btn btn-info']) ?></p>
 </body>
 </html>
-
-
-

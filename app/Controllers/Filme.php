@@ -86,20 +86,7 @@ class Filme extends BaseController
             echo "Ocorreu um erro";
         }
     }
-
-    public function buscarPorNome()
-    {
-        $termo = $this->request->getGet('q');
-        $resultadoBusca = [];
-
-        if ($termo) { 
-            $resultadoBusca = $this->filmeModel
-                ->like('filme', $termo)
-                ->findAll(); 
-        }
-
-        return $this->response->setJSON($resultadoBusca);
-    }
+    
     public function index($statusAtual = null){
         $termoBusca = $this->request->getGet('q'); 
         $consulta = $this->filmeModel;

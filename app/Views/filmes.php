@@ -32,55 +32,17 @@
     </script>
     
     <div class="form-group" style="margin-bottom:20px; position: relative;">
-        <label for="buscaFilme"><strong>Pesquisar por Filme:</strong></label>
+    <label for="buscaFilme"><strong>Pesquisar por Filme:</strong></label>
+    <form action="<?= base_url('filmes') ?>" method="get" style="display: inline-block;">
         <input type="text" id="buscaFilme" name="q" class="form-control" 
                 style="width:300px; display:inline-block;" 
                 value="<?= esc($buscaNome ?? '') ?>" placeholder="Digite o nome do filme" autocomplete="off">
-        <div id="resultadosBusca" style="display:none; position:absolute; z-index:1000; width:300px;"></div>
-    </div>
-
-    <script>
-        document.getElementById("buscaFilme").addEventListener("keyup", function() {
-            let query = this.value;
-            if(query.length < 3){
-                document.getElementById("resultadosBusca").style.display = "none";
-                return;
-            }
-            fetch("<?= base_url('filmes/search') ?>?q=" + encodeURIComponent(query))
-                .then(res => res.json())
-                .then(data => {
-                    let resultadosDiv = document.getElementById("resultadosBusca");
-                    resultadosDiv.innerHTML = "";
-                    if(data.length > 0){
-                        data.forEach(filme => {
-                            let item = document.createElement("div");
-                            item.innerHTML = `<img src="${filme.capa}" onerror="this.style.display='none'" style="height:50px; vertical-align:middle;"> ${filme.filme} (${filme.ano || ''})`;
-                            item.addEventListener("click", function(){
-                                document.getElementById("buscaFilme").value = filme.filme;
-                                resultadosDiv.style.display = "none";
-                            });
-                            resultadosDiv.appendChild(item);
-                        });
-                        resultadosDiv.style.display = "block";
-                    } else {
-                        resultadosDiv.style.display = "none";
-                    }
-                });
-        });
-
-        document.getElementById("buscaFilme").addEventListener("keydown", function(e){
-            if(e.key === "Enter"){
-                e.preventDefault();
-                let nome = this.value.trim();
-                if(nome){
-                    let statusParam = "<?= $statusAtual ?? '' ?>";
-                    let url = "<?= base_url('filmes') ?>";
-                    if(statusParam) url += "/" + encodeURIComponent(statusParam);
-                    window.location.href = url + "?q=" + encodeURIComponent(nome);
-                }
-            }
-        });
-    </script>
+        <button type="submit" class="btn btn-primary" style="margin-left: 10px;">Buscar</button>
+        <?php if (!empty($statusAtual)): ?>
+            <input type="hidden" name="status" value="<?= esc($statusAtual) ?>">
+        <?php endif; ?>
+    </form>
+</div>
 
     <h2>
         <?php if (!empty($statusAtual)): ?>
