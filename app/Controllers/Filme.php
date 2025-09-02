@@ -186,7 +186,6 @@ class Filme extends BaseController
         ]);
     }
 
-   
 
     public function view($idFilme)
     {
