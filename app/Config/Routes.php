@@ -17,5 +17,8 @@ $routes->get('recomendacoes', 'Filme::recomendacoes');
 $routes->get('filmes/search', 'Filme::search');
 $routes->get('filme/view/(:num)', 'Filme::view/$1');
 
-// ⚠️ Deixe essa por último (genérica)
+
+
+
+
 $routes->get('filmes/(:any)', 'Filme::index/$1');

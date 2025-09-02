@@ -7,7 +7,7 @@
     
 </head>
 <body>
-    <h1> IsaLivix</h2>
+    <h1> Isalix</h2>
 <div class="container">
     <div style="margin-bottom:20px;">
         <?= anchor(base_url('filme/formulario'), 'Novo Filme', ['class' => 'btn btn-success']) ?>
@@ -27,7 +27,7 @@
 
     <script>
         document.getElementById('filtroStatus').addEventListener('change', function() {
-            window.location.href = this.value; /* Ao mudar o <select>, a página redireciona automaticamente para a URL correspondente ao status selecionado.*/
+            window.location.href = this.value; 
         });
     </script>
     
@@ -35,8 +35,7 @@
     <label for="buscaFilme"><strong>Pesquisar por Filme:</strong></label>
     <form action="<?= base_url('filmes') ?>" method="get" style="display: inline-block;">
         <input type="text" id="buscaFilme" name="q" class="form-control" 
-                style="width:300px; display:inline-block;" 
-                value="<?= esc($buscaNome ?? '') ?>" placeholder="Digite o nome do filme" autocomplete="off">
+      style="width:300px; display:inline-block;"  value="<?= esc($buscaNome ?? '') ?>" placeholder="Digite o nome do filme" autocomplete="off">
         <button type="submit" class="btn btn-primary" style="margin-left: 10px;">Buscar</button>
         <?php if (!empty($statusAtual)): ?>
             <input type="hidden" name="status" value="<?= esc($statusAtual) ?>">
